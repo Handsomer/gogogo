@@ -1,29 +1,30 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"strconv"
 )
 
-func BasicType(){
+func BasicType() {
 	fmt.Println("hello world!---")
 	//初始化数字与字符串的初始化
 	var i int64
 	var b string
-	fmt.Println("i = ",i)
+	fmt.Println("i = ", i)
 	fmt.Println("b = ", b)
 	//
 	var floatNum float64 = 10.1
 	var price1, price2 float64 = 8.8, 9.6
 	fmt.Println("floatNum = ", floatNum)
-	fmt.Println(price1,"----", price2)
+	fmt.Println(price1, "----", price2)
 	//
 	ii := 1
 	ss := "Hello gogogo!"
-	fmt.Printf("ii = %v" +
+	fmt.Printf("ii = %v"+
 		" ---\n", ii)
-	fmt.Printf("ss = %v  ---\n",ss)
+	fmt.Printf("ss = %v  ---\n", ss)
 }
 
 func BoolType() {
@@ -34,15 +35,15 @@ func BoolType() {
 	if a {
 		fmt.Println("a", a)
 	}
-	if b{
-		fmt.Println("b",b)
+	if b {
+		fmt.Println("b", b)
 	}
-	if c{
-		fmt.Println("c",c)
+	if c {
+		fmt.Println("c", c)
 	}
 }
 
-func IntDemo(){
+func IntDemo() {
 	//初始化 int64 类型
 	var a int64
 	a = 10
@@ -52,10 +53,10 @@ func IntDemo(){
 	fmt.Println(i32 + 10)
 	//输出int64 最大值
 	fmt.Println(math.MaxInt64)
-	fmt.Println(10 /10)
+	fmt.Println(10 / 10)
 }
 
-func StringDemo(){
+func StringDemo() {
 	s1 := "\"Hello world \""
 	s2 := `"Hello world"`
 	fmt.Println(s1)
@@ -67,7 +68,7 @@ func StringDemo(){
 	fmt.Println(s3 + s4)
 }
 
-func testConvert(){
+func testConvert() {
 	//转换操作 1
 	//int 转 string
 	sint := strconv.Itoa(97)
@@ -99,19 +100,19 @@ func testConvert(){
 	fmt.Println(fmt.Sprint(i) == "42")
 }
 
-func enumDemo(){
-	const(
-		Sunday = 0
-		Monday = 1
-		Tuesday = 2
+func enumDemo() {
+	const (
+		Sunday    = 0
+		Monday    = 1
+		Tuesday   = 2
 		Wednesday = 3
-		Thursday = 4
-		Friday = 5
-		Saturday = 6
+		Thursday  = 4
+		Friday    = 5
+		Saturday  = 6
 	)
 	fmt.Println(Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday)
 
-	const(
+	const (
 		Sunday_1 = iota
 		Mondat_1
 		Tuesday_1
@@ -123,13 +124,30 @@ func enumDemo(){
 	fmt.Println(Sunday_1, Mondat_1, Tuesday_1, Wednesday_1, Thursday_1, Friday_1, Saturday_1)
 }
 
-func deferDemo() string{
+func deferDemo() string {
 	//defer 的调用顺序
 	defer fmt.Println("defer place one")
 	defer fmt.Println("defer place two")
 	fmt.Println("print in after defer place")
 	return "return place"
 
+}
+
+func Divice(a, b int) (int, error) {
+	if b == 0 {
+		return 0, errors.New("divice by zone")
+	}
+	return a / b, nil
+}
+
+func runDivice() {
+	a := 10
+	b := 2
+	res, err := Divice(a, b)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(res)
 }
 func main() {
 	//基本数据类型：int ，string 赋值与初始化
@@ -145,6 +163,7 @@ func main() {
 	//枚举数据类型
 	//enumDemo()
 	//defer调用时机 test
-	fmt.Println(deferDemo())
+	//fmt.Println(deferDemo())
+	//error 数据类型：自定义error
+	runDivice()
 }
-
