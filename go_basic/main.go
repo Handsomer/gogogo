@@ -186,7 +186,7 @@ func testArray(){
 	fmt.Println(matrix)
 }
 
-func main() {
+func basicDataTest(){
 	//基本数据类型：int ，string 赋值与初始化
 	//BasicType()
 	//基本数据类型：bool 赋值与初始化
@@ -199,6 +199,9 @@ func main() {
 	//testConvert()
 	//枚举数据类型
 	//enumDemo()
+}
+
+func errorTest(){
 	//defer调用时机 test
 	//fmt.Println(deferDemo())
 	//error 数据类型：自定义error
@@ -206,7 +209,13 @@ func main() {
 	//触发panic 与 恢复
 	//res, err := runMustDrive(10, 0)
 	//fmt.Println(res, err)
+}
 
-	//	数组类型：初始化与枚举
+func arrayTest(){
+	//	数组类型：初始化与输出
 	testArray()
+}
+
+func main() {
+	arrayTest()
 }
