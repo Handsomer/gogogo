@@ -122,6 +122,15 @@ func enumDemo(){
 	)
 	fmt.Println(Sunday_1, Mondat_1, Tuesday_1, Wednesday_1, Thursday_1, Friday_1, Saturday_1)
 }
+
+func deferDemo() string{
+	//defer 的调用顺序
+	defer fmt.Println("defer place one")
+	defer fmt.Println("defer place two")
+	fmt.Println("print in after defer place")
+	return "return place"
+
+}
 func main() {
 	//基本数据类型：int ，string 赋值与初始化
 	//BasicType()
@@ -135,5 +144,7 @@ func main() {
 	//testConvert()
 	//枚举数据类型
 	//enumDemo()
+	//defer调用时机 test
+	fmt.Println(deferDemo())
 }
 
