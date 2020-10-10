@@ -149,6 +149,23 @@ func runDivice() {
 	}
 	fmt.Println(res)
 }
+
+func MustDivece(a, b int)(int){
+	if b == 0{
+		panic("divice is zore")
+	}
+	return a/b
+}
+
+func runMustDrive(a, b int)(res int, e error){
+	defer func(){
+		if err := recover(); err != nil{
+			e = fmt.Errorf("%v", err)
+		}
+	}()
+	res = MustDivece(a, b)
+	return
+}
 func main() {
 	//基本数据类型：int ，string 赋值与初始化
 	//BasicType()
@@ -165,5 +182,10 @@ func main() {
 	//defer调用时机 test
 	//fmt.Println(deferDemo())
 	//error 数据类型：自定义error
-	runDivice()
+	//runDivice()
+	//触发panic 与 恢复
+	res, err := runMustDrive(10, 0)
+	fmt.Println(res, err)
+
 }
+
