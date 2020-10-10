@@ -123,12 +123,17 @@ func enumDemo(){
 	fmt.Println(Sunday_1, Mondat_1, Tuesday_1, Wednesday_1, Thursday_1, Friday_1, Saturday_1)
 }
 func main() {
-
+	//基本数据类型：int ，string 赋值与初始化
 	//BasicType()
+	//基本数据类型：bool 赋值与初始化
 	//BoolType()
+	//基本数据类型：int 64 与 32 位转化
 	//IntDemo()
+	//基本数据类型：string 拼接
 	//StringDemo()
+	//基本数据类型：string 与 int byte的相互转化
 	//testConvert()
-	enumDemo()
+	//枚举数据类型
+	//enumDemo()
 }
 
