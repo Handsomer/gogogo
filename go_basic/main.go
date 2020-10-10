@@ -150,22 +150,42 @@ func runDivice() {
 	fmt.Println(res)
 }
 
-func MustDivece(a, b int)(int){
-	if b == 0{
+func MustDivece(a, b int) int {
+	if b == 0 {
 		panic("divice is zore")
 	}
-	return a/b
+	return a / b
 }
 
-func runMustDrive(a, b int)(res int, e error){
-	defer func(){
-		if err := recover(); err != nil{
+func runMustDrive(a, b int) (res int, e error) {
+	defer func() {
+		if err := recover(); err != nil {
 			e = fmt.Errorf("%v", err)
 		}
 	}()
 	res = MustDivece(a, b)
 	return
 }
+
+func testArray(){
+	//数值类型数组 初始化 赋值
+	var arrayInt64 [3] int
+	arrayInt64[0], arrayInt64[1] = 1, 2
+	fmt.Println(arrayInt64)
+	//字符串类型数组 初始化 赋值
+	arrayString := [3] string{"zhang", "wang", "li"}
+	fmt.Println(arrayString)
+//	省略长度的初始化数组
+	arrayFloat := [...]float64{1.1, 2.2, 3.3}
+	fmt.Println(arrayFloat)
+//	二维数组初始化
+	matrix := [2][2] int64{
+		{0,1},
+		{2,3},
+	}
+	fmt.Println(matrix)
+}
+
 func main() {
 	//基本数据类型：int ，string 赋值与初始化
 	//BasicType()
@@ -184,8 +204,9 @@ func main() {
 	//error 数据类型：自定义error
 	//runDivice()
 	//触发panic 与 恢复
-	res, err := runMustDrive(10, 0)
-	fmt.Println(res, err)
+	//res, err := runMustDrive(10, 0)
+	//fmt.Println(res, err)
 
+	//	数组类型：初始化与枚举
+	testArray()
 }
-
