@@ -188,27 +188,27 @@ func testArray(){
 
 func basicDataTest(){
 	//基本数据类型：int ，string 赋值与初始化
-	//BasicType()
+	BasicType()
 	//基本数据类型：bool 赋值与初始化
-	//BoolType()
+	BoolType()
 	//基本数据类型：int 64 与 32 位转化
-	//IntDemo()
+	IntDemo()
 	//基本数据类型：string 拼接
-	//StringDemo()
+	StringDemo()
 	//基本数据类型：string 与 int byte的相互转化
-	//testConvert()
+	testConvert()
 	//枚举数据类型
-	//enumDemo()
+	enumDemo()
 }
 
 func errorTest(){
 	//defer调用时机 test
-	//fmt.Println(deferDemo())
+	fmt.Println(deferDemo())
 	//error 数据类型：自定义error
-	//runDivice()
+	runDivice()
 	//触发panic 与 恢复
-	//res, err := runMustDrive(10, 0)
-	//fmt.Println(res, err)
+	res, err := runMustDrive(10, 0)
+	fmt.Println(res, err)
 }
 
 func arrayTest(){
@@ -217,5 +217,7 @@ func arrayTest(){
 }
 
 func main() {
+	basicDataTest()
+	errorTest()
 	arrayTest()
 }
