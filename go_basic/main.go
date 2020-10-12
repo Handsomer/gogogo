@@ -240,10 +240,18 @@ func testSlice() {
 	fmt.Println(vals)
 	vals2 := []int{4, 3, 5}
 	newValues := append(vals, vals2...)
+	fmt.Println()
 	fmt.Println("before is:",newValues)
 	sort.Ints(newValues)
 	sort.Sort(sort.Reverse(sort.IntSlice(newValues)))
-	fmt.Println("revert sort value is:",newValues)
+	//fmt.Printf("revert sort value is:",newValues,"\n size is: %d cap is :%d", len(newValues), cap(newValues))
+	fmt.Printf("size is: %d cap is :%d \n", len(newValues), cap(newValues))
+	newValues = append(newValues, 99)
+	newValues = append(newValues, 99)
+	newValues = append(newValues, 99)
+	newValues = append(newValues, 99)
+	fmt.Printf("\n size is: %d cap is :%d\n", len(newValues), cap(newValues))
+
 	vals[0] = 100
 	fmt.Println(vals, newValues)
 	//slice 的 普通赋值模式与高效模式
