@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 )
 
@@ -123,7 +124,7 @@ func enumDemo() {
 	)
 	fmt.Println(Sunday_1, Mondat_1, Tuesday_1, Wednesday_1, Thursday_1, Friday_1, Saturday_1)
 }
-func basicDataTest(){
+func basicDataTest() {
 	//基本数据类型：int ，string 赋值与初始化
 	BasicType()
 	//基本数据类型：bool 赋值与初始化
@@ -180,7 +181,7 @@ func runMustDrive(a, b int) (res int, e error) {
 	return
 }
 
-func errorTest(){
+func errorTest() {
 	//defer调用时机 test
 	fmt.Println(deferDemo())
 	//error 数据类型：自定义error
@@ -190,36 +191,34 @@ func errorTest(){
 	fmt.Println(res, err)
 }
 
-func testArray(){
+func testArray() {
 	//数值类型数组 初始化 赋值
-	var arrayInt64 [3] int
+	var arrayInt64 [3]int
 	arrayInt64[0], arrayInt64[1] = 1, 2
 	fmt.Println(arrayInt64)
 	//字符串类型数组 初始化 赋值
-	arrayString := [3] string{"zhang", "wang", "li"}
+	arrayString := [3]string{"zhang", "wang", "li"}
 	fmt.Println(arrayString)
 	//	省略长度的初始化数组
 	arrayFloat := [...]float64{1.1, 2.2, 3.3}
 	fmt.Println(arrayFloat)
 	//	二维数组初始化
-	matrix := [2][2] int64{
-		{0,1},
-		{2,3},
+	matrix := [2][2]int64{
+		{0, 1},
+		{2, 3},
 	}
 	fmt.Println(matrix)
 	//字符串类型数组 初始化 与遍历
-	names := [3] string{"zhao", "qian", "sun"}
-	fmt.Println(len(names),names[1])
+	names := [3]string{"zhao", "qian", "sun"}
+	fmt.Println(len(names), names[1])
 	names[1] = "qian2"
-	fmt.Println(len(names),names[1])
+	fmt.Println(len(names), names[1])
 	fmt.Println(names)
 }
 
-
-
-func testSlice(){
+func testSlice() {
 	//切片数值类型：赋值，输出
-	names := [] string{"zhao", "qian", "sun"}
+	names := []string{"zhao", "qian", "sun"}
 	fmt.Println(names, len(names), cap(names))
 	//	切片赋值 另一个变量：验证赋值是一种引用
 	names2 := names
@@ -230,37 +229,40 @@ func testSlice(){
 	names[0] = "zhao3"
 	fmt.Println(names3)
 	//	遍历操作
-	for index, value := range names{
+	for index, value := range names {
 		fmt.Println(index, value)
 	}
 	//	slice 操作,验证append 拼接以后生成了新的对象
-	vals := make([] int, 0)
-	for i := 0; i< 3; i++{
+	vals := make([]int, 0)
+	for i := 0; i < 3; i++ {
 		vals = append(vals, i)
 	}
 	fmt.Println(vals)
-	vals2 := [] int{3,4,5}
+	vals2 := []int{4, 3, 5}
 	newValues := append(vals, vals2...)
-	fmt.Println(newValues)
+	fmt.Println("before is:",newValues)
+	sort.Ints(newValues)
+	sort.Sort(sort.Reverse(sort.IntSlice(newValues)))
+	fmt.Println("revert sort value is:",newValues)
 	vals[0] = 100
 	fmt.Println(vals, newValues)
 	//slice 的 普通赋值模式与高效模式
 	//普通模式
 	manyInt := make([]int, 100)
-	a := make([] int, 0)
-	for _, val := range manyInt{
-		a = append(a, val + val)
+	a := make([]int, 0)
+	for _, val := range manyInt {
+		a = append(a, val+val)
 	}
-	fmt.Println("a ====",a)
+	fmt.Println("a ====", a)
 	//	高效模式
-	b := make([] int, len(manyInt))
-	for i, val := range manyInt{
-		b[i] = val +1
+	b := make([]int, len(manyInt))
+	for i, val := range manyInt {
+		b[i] = val + 1
 	}
-	fmt.Println("b ====",b)
+	fmt.Println("b ====", b)
 }
 
-func arrayTest(){
+func arrayTest() {
 	//	数组类型：初始化与输出
 	testArray()
 	testSlice()
