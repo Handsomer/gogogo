@@ -19,7 +19,7 @@ func BasicType() {
 	var price1, price2 float64 = 8.8, 9.6
 	fmt.Println("floatNum = ", floatNum)
 	fmt.Println(price1, "----", price2)
-	//
+	//类型推断
 	ii := 1
 	ss := "Hello gogogo!"
 	fmt.Printf("ii = %v"+
@@ -123,6 +123,20 @@ func enumDemo() {
 	)
 	fmt.Println(Sunday_1, Mondat_1, Tuesday_1, Wednesday_1, Thursday_1, Friday_1, Saturday_1)
 }
+func basicDataTest(){
+	//基本数据类型：int ，string 赋值与初始化
+	BasicType()
+	//基本数据类型：bool 赋值与初始化
+	BoolType()
+	//基本数据类型：int 64 与 32 位转化
+	IntDemo()
+	//基本数据类型：string 拼接
+	StringDemo()
+	//基本数据类型：string 与 int byte的相互转化
+	testConvert()
+	//枚举数据类型
+	enumDemo()
+}
 
 func deferDemo() string {
 	//defer 的调用顺序
@@ -130,7 +144,6 @@ func deferDemo() string {
 	defer fmt.Println("defer place two")
 	fmt.Println("print in after defer place")
 	return "return place"
-
 }
 
 func Divice(a, b int) (int, error) {
@@ -167,6 +180,16 @@ func runMustDrive(a, b int) (res int, e error) {
 	return
 }
 
+func errorTest(){
+	//defer调用时机 test
+	fmt.Println(deferDemo())
+	//error 数据类型：自定义error
+	runDivice()
+	//触发panic 与 恢复
+	res, err := runMustDrive(10, 0)
+	fmt.Println(res, err)
+}
+
 func testArray(){
 	//数值类型数组 初始化 赋值
 	var arrayInt64 [3] int
@@ -192,30 +215,7 @@ func testArray(){
 	fmt.Println(names)
 }
 
-func basicDataTest(){
-	//基本数据类型：int ，string 赋值与初始化
-	BasicType()
-	//基本数据类型：bool 赋值与初始化
-	BoolType()
-	//基本数据类型：int 64 与 32 位转化
-	IntDemo()
-	//基本数据类型：string 拼接
-	StringDemo()
-	//基本数据类型：string 与 int byte的相互转化
-	testConvert()
-	//枚举数据类型
-	enumDemo()
-}
 
-func errorTest(){
-	//defer调用时机 test
-	fmt.Println(deferDemo())
-	//error 数据类型：自定义error
-	runDivice()
-	//触发panic 与 恢复
-	res, err := runMustDrive(10, 0)
-	fmt.Println(res, err)
-}
 
 func testSlice(){
 	//切片数值类型：赋值，输出
@@ -267,7 +267,7 @@ func arrayTest(){
 }
 
 func main() {
-	//basicDataTest()
-	//errorTest()
+	basicDataTest()
+	errorTest()
 	arrayTest()
 }
