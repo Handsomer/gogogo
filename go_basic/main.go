@@ -458,11 +458,34 @@ func loopTest(){
 	ifSwitchFor()
 	sliceFor()
 }
+
+//类型传递
+//内置类型：数值类型、字符串、布尔类型、数组。传递的是副本 (所以一般不用数组啦)，会拷贝原始值，无法修改
+//引用类型: 切片、映射、通道、接口和函数类型。通过复制传递应用类型值的副本，本质上就是共享底层数据结构。可以修改
+func testAnonymouseFunc(){
+	func (s string){
+		fmt.Println(s)
+	}("hello helllo hello hello hello hello hello hello hello hello hello hello ")
+}
+//很多语言都有闭包的概念， 所谓闭包就是一个函数“捕获”了和它在同一作用域的其他常量和变量。
+//当闭包被调用的时候，不管在程序什么地方调用，闭包能够使用这些常量或者变量，
+//并且只要闭包还在使用它，这些变量就不会销毁，一直存在。 上文中提到的匿名函数其实就是闭包。来看一个简单的示例
+// 闭包示例
+//func testClosure() {
+//	suffix := ".go"
+//	addSuffix := func(name string) string {
+//		return name + suffix // 这里使用到了 suffix 这个变量，所以 addSuffix 就是一个闭包
+//	}
+//	fmt.Println(addSuffix("hello_world"))
+//}
+func funcTest(){
+	testAnonymouseFunc()
+}
 func main() {
 	//basicDataTest()
 	//errorTest()
 	//arrayTest()
 	//mapTest()
-	loopTest()
+	//loopTest()
+	funcTest()
 }
-
