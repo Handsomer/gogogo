@@ -292,12 +292,12 @@ func delMap(m map[string]int) {
 	fmt.Println(m)
 	delete(m, "hello")
 	fmt.Println(m)
-	if v, ok := m["hello"]; ok{
+	if v, ok := m["hello"]; ok {
 		fmt.Printf("%s value is: %d \n", "hello", v)
-	}else {
+	} else {
 		fmt.Printf("%s value is: %d \n", "hello", -1)
 	}
-	if v, ok := m["world"]; ok{
+	if v, ok := m["world"]; ok {
 		fmt.Printf("%s value is: %d \n", "world", v)
 	}
 }
@@ -308,47 +308,70 @@ func rangeMap(m map[string]int) {
 	}
 }
 
-func setMap(){
+func setMap() {
 	m := make(map[string]bool)
 	m["hello"] = true
 	m["world"] = true
 	m["test_F"] = false
 	key := "hello"
 	key_f := "test_F"
-	if _, ok := m[key];ok{
-		fmt.Printf("%s is exists\n",key)
+	if _, ok := m[key]; ok {
+		fmt.Printf("%s is exists\n", key)
 		fmt.Println(ok)
 	}
-	if _, ok := m[key_f];ok{
-		fmt.Printf("%s is exists\n",key_f)
+	if _, ok := m[key_f]; ok {
+		fmt.Printf("%s is exists\n", key_f)
 		fmt.Println(ok)
 	}
 }
 
-func calNumByMap(){
+//计算文本中重复单词的个数
+func calNumByMap() {
 	FilePath := "./word.txt"
 	InputFile, InputError := os.OpenFile(FilePath, os.O_CREATE|os.O_RDWR, 0644)
-	if InputError != nil{
+	if InputError != nil {
 		fmt.Println("open file fail ---")
 		return
 	}
-	defer  InputFile.Close()
+	defer InputFile.Close()
 	InputReader := bufio.NewReader(InputFile)
-	calMap := make(map[string] int)
-	for{
+	calMap := make(map[string]int)
+	for {
 		inputString, readError := InputReader.ReadString('\n')
 		//文件结束判断
-		if readError == io.EOF{
+		if readError == io.EOF {
 			fmt.Println("file error ---")
 			break
 		}
 		calMap[inputString] += 1
 	}
 	fmt.Println(calMap)
-	for k, v := range  calMap{
+	for k, v := range calMap {
 		fmt.Println(strings.TrimRight(k, "\n"), "---is---:", v)
 	}
+}
 
+//map 函数实现 slice 数据的去重
+func unique(intVals []int) []int {
+	tmpMap := make(map[int]bool)
+	for _, val := range intVals {
+		if _, ok := tmpMap[val]; ok {
+			continue
+		}
+		tmpMap[val] = true
+	}
+	fmt.Printf("maps size is:%d \n", len(tmpMap))
+	//retSlice := make([]int, 0)
+	//for k, _ := range tmpMap {
+	//	retSlice = append(retSlice, k)
+	//}
+	retSlice := make([]int, len(tmpMap))
+	i := 0
+	for k, _ := range tmpMap{
+		retSlice[i] = k
+		i += 1
+	}
+	return retSlice
 }
 
 func mapTest() {
@@ -361,8 +384,14 @@ func mapTest() {
 	rangeMap(m)
 	//map 实现一个set
 	setMap()
-//	cal words num
+	//	cal words num
 	calNumByMap()
+	//slice数据类型去重复
+	intVals := []int{1, 2, 1, 1, 1, 5, 6, 8, 8, 8, 9, 9, 10}
+	retVals := unique(intVals)
+	for index, val := range retVals {
+		fmt.Printf("index is:%d value is:%d \n", index, val)
+	}
 }
 
 func main() {
