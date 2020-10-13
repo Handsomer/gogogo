@@ -276,8 +276,22 @@ func arrayTest() {
 	testSlice()
 }
 
+func initMap()(map[string] int ){
+	m := make(map[string] int)
+	m["zhang"] = 1
+	m["hello"] = 2
+	m["world"] = 3
+	return m
+}
+func mapTest(){
+//	初始化一个map
+	m := initMap()
+	fmt.Printf("m[\"%s\"] is: %d \n","hello",m["hello"])
+}
+
 func main() {
-	basicDataTest()
-	errorTest()
-	arrayTest()
+	//basicDataTest()
+	//errorTest()
+	//arrayTest()
+	mapTest()
 }
