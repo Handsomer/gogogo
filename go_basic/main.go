@@ -1,11 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"errors"
 	"fmt"
+	"io"
 	"math"
+	"os"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func BasicType() {
@@ -321,6 +325,32 @@ func setMap(){
 	}
 }
 
+func calNumByMap(){
+	FilePath := "./word.txt"
+	InputFile, InputError := os.OpenFile(FilePath, os.O_CREATE|os.O_RDWR, 0644)
+	if InputError != nil{
+		fmt.Println("open file fail ---")
+		return
+	}
+	defer  InputFile.Close()
+	InputReader := bufio.NewReader(InputFile)
+	calMap := make(map[string] int)
+	for{
+		inputString, readError := InputReader.ReadString('\n')
+		//文件结束判断
+		if readError == io.EOF{
+			fmt.Println("file error ---")
+			break
+		}
+		calMap[inputString] += 1
+	}
+	fmt.Println(calMap)
+	for k, v := range  calMap{
+		fmt.Println(strings.TrimRight(k, "\n"), "---is---:", v)
+	}
+
+}
+
 func mapTest() {
 	//	初始化一个map
 	m := initMap()
@@ -331,6 +361,8 @@ func mapTest() {
 	rangeMap(m)
 	//map 实现一个set
 	setMap()
+//	cal words num
+	calNumByMap()
 }
 
 func main() {
