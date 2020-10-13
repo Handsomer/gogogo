@@ -478,6 +478,11 @@ func testAnonymouseFunc(){
 //	}
 //	fmt.Println(addSuffix("hello_world"))
 //}
+//对于一般不太严重的场景，返回错误值 error 类型 (业务绝大部分场景)
+//对于严重的错误需要整个进程退出的场景，使用 panic 来抛异常，及早发现错误
+//如果希望捕获 panic 异常，可以使用 recover 函数捕获，并且包装成一个错误返回
+//web 框架等会帮你捕获 panic 异常，然后返回客户端一个 http 500 状态码错误
+
 func funcTest(){
 	testAnonymouseFunc()
 }
