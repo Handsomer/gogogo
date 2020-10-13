@@ -10,6 +10,9 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
+
+	//"sync"
 )
 
 func BasicType() {
@@ -374,6 +377,23 @@ func unique(intVals []int) []int {
 	return retSlice
 }
 
+func concurrentMap(){
+	m := make(map[int] int)
+	//go 写协程
+	go func() {
+		for i := 0; i < 100; i++{
+			m[i] = i
+		}
+	}()
+	time.Sleep(10)
+	//go 读协程
+	go func(){
+		for i := 0; i < 100; i++{
+			fmt.Printf("key:%d  value:%d \n", i, m[i])
+		}
+	}()
+}
+
 func mapTest() {
 	//	初始化一个map
 	m := initMap()
@@ -392,11 +412,57 @@ func mapTest() {
 	for index, val := range retVals {
 		fmt.Printf("index is:%d value is:%d \n", index, val)
 	}
+//	go 并发
+	concurrentMap()
 }
 
+func ifSwitchFor(){
+	iFlag := 5
+	if iFlag > 6{
+		fmt.Printf("iFlag is: %d > 6 \n",iFlag)
+	}else if iFlag == 6{
+		fmt.Printf("iFlag is: %d == 6 \n",iFlag)
+	}else {
+		fmt.Printf("iFlag is: %d < 6 \n",iFlag)
+	}
+	switch iFlag {
+	case 0, 6:
+		fmt.Printf("iFlag is: %d == 0 or 6 \n",iFlag)
+	case 1,2,3,4,5:
+		fmt.Printf("iFlag is: %d == 1,2,3,4,5 \n",iFlag)
+	default:
+		fmt.Printf("iFlag is: %d != 1,2,3,4,5,6 \n",iFlag)
+	}
+}
+
+func sliceFor(){
+	sSlice := []string {"key1", "key2", "key3"}
+	for index, value := range sSlice{
+		fmt.Println(index, value, "++++++")
+	}
+	//for 遍历 slice 只有一个参数接收返回时，该参数接收的是索引
+	for index := range sSlice{
+		fmt.Println(index, "=======")
+	}
+	sMap := map[string] string {"k1":"v1", "k2":"v2"}
+	for k, v := range sMap{
+		fmt.Println(k,v)
+	}
+	//for 遍历 map 只有一个参数接收返回时，该参数接收的是key
+	for k := range sMap{
+		fmt.Println(k, "--- --- ---")
+	}
+}
+
+func loopTest(){
+	ifSwitchFor()
+	sliceFor()
+}
 func main() {
 	//basicDataTest()
 	//errorTest()
 	//arrayTest()
-	mapTest()
+	//mapTest()
+	loopTest()
 }
+
