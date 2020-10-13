@@ -241,7 +241,7 @@ func testSlice() {
 	vals2 := []int{4, 3, 5}
 	newValues := append(vals, vals2...)
 	fmt.Println()
-	fmt.Println("before is:",newValues)
+	fmt.Println("before is:", newValues)
 	sort.Ints(newValues)
 	sort.Sort(sort.Reverse(sort.IntSlice(newValues)))
 	//fmt.Printf("revert sort value is:",newValues,"\n size is: %d cap is :%d", len(newValues), cap(newValues))
@@ -276,17 +276,61 @@ func arrayTest() {
 	testSlice()
 }
 
-func initMap()(map[string] int ){
-	m := make(map[string] int)
+func initMap() map[string]int {
+	m := make(map[string]int)
 	m["zhang"] = 1
 	m["hello"] = 2
 	m["world"] = 3
 	return m
 }
-func mapTest(){
-//	初始化一个map
+
+func delMap(m map[string]int) {
+	fmt.Println(m)
+	delete(m, "hello")
+	fmt.Println(m)
+	if v, ok := m["hello"]; ok{
+		fmt.Printf("%s value is: %d \n", "hello", v)
+	}else {
+		fmt.Printf("%s value is: %d \n", "hello", -1)
+	}
+	if v, ok := m["world"]; ok{
+		fmt.Printf("%s value is: %d \n", "world", v)
+	}
+}
+
+func rangeMap(m map[string]int) {
+	for k, v := range m {
+		fmt.Printf("m[\"%s\"] value is: %d \n", k, v)
+	}
+}
+
+func setMap(){
+	m := make(map[string]bool)
+	m["hello"] = true
+	m["world"] = true
+	m["test_F"] = false
+	key := "hello"
+	key_f := "test_F"
+	if _, ok := m[key];ok{
+		fmt.Printf("%s is exists\n",key)
+		fmt.Println(ok)
+	}
+	if _, ok := m[key_f];ok{
+		fmt.Printf("%s is exists\n",key_f)
+		fmt.Println(ok)
+	}
+}
+
+func mapTest() {
+	//	初始化一个map
 	m := initMap()
-	fmt.Printf("m[\"%s\"] is: %d \n","hello",m["hello"])
+	fmt.Printf("m[\"%s\"] is: %d \n", "hello", m["hello"])
+	//删除map 元素
+	delMap(m)
+	//遍历map 的每一个元素
+	rangeMap(m)
+	//map 实现一个set
+	setMap()
 }
 
 func main() {
