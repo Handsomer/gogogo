@@ -284,10 +284,15 @@ func arrayTest() {
 }
 
 func initMap() map[string]int {
-	m := make(map[string]int)
-	m["zhang"] = 1
-	m["hello"] = 2
-	m["world"] = 3
+	//m := make(map[string]int)
+	//m["zhang"] = 1
+	//m["hello"] = 2
+	//m["world"] = 3
+	m := map[string]int{
+		"zhang":1,
+		"hello":2,
+		"world":3,
+	}
 	return m
 }
 
@@ -515,6 +520,12 @@ func testString(){
 	fmt.Println(Init.Init() == status1)
 	status2 := Success
 	fmt.Println(status2.String()," ====== ")
+}
+
+func structTest(){
+	//Go 也有类似的访问控制，不过是通过数据和方法的命名首字母大小写决定的。
+	//在 Go 的包(package)中，只有首字母大写的才能被其他包 导入使用，小写开头的则不行 。
+	//所以一般结构体的私有数据成员和方法，我们使用小写开头，而公有的数据成员和方法，我们使用大写开头就好了。
 }
 
 func main() {
