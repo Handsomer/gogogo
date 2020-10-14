@@ -486,11 +486,43 @@ func testAnonymouseFunc(){
 func funcTest(){
 	testAnonymouseFunc()
 }
+
+//OOP
+type Enum int
+const (
+	Init Enum = iota
+	Success
+	Fail
+	InitName = "初始化"
+	SuccessName = "成功"
+	FailName = "失败"
+)
+
+func (e Enum)Init() int {
+	return int(e)
+}
+
+func (e Enum) String() string{
+	return []string{
+		InitName,
+		SuccessName,
+		FailName,
+	}[e]
+}
+
+func testString(){
+	status1 := 0
+	fmt.Println(Init.Init() == status1)
+	status2 := Success
+	fmt.Println(status2.String()," ====== ")
+}
+
 func main() {
 	//basicDataTest()
 	//errorTest()
 	//arrayTest()
 	//mapTest()
 	//loopTest()
-	funcTest()
+	//funcTest()
+	testString()
 }
