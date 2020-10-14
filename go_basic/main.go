@@ -522,10 +522,65 @@ func testString(){
 	fmt.Println(status2.String()," ====== ")
 }
 
+type MSet struct{
+	mapCache map[string]bool
+}
+
+func NewSet(iniSlice []string) *MSet{
+	setObj := MSet{}
+	setObj.mapCache = make(map[string] bool)
+	for _, value := range iniSlice{
+		setObj.mapCache[value] = true
+	}
+	return &setObj
+}
+
+func (s MSet)Add(key string) bool{
+	if _, ok := s.mapCache[key]; !ok{
+		s.mapCache[key] = true
+		return true
+	}
+	return false
+}
+
+func (s MSet)Exist(i string) bool{
+	if _, ok := s.mapCache[i]; ok{
+		return ok
+	}
+	return false
+}
+
+func (s MSet)Delete(i string) bool{
+	if _, ok := s.mapCache[i]; ok{
+		delete(s.mapCache, i)
+		return ok
+	}else{
+		return false
+	}
+}
+
+func showValues(s *MSet){
+	for key, _ := range s.mapCache{
+		fmt.Println(key)
+	}
+}
+
 func structTest(){
 	//Go 也有类似的访问控制，不过是通过数据和方法的命名首字母大小写决定的。
 	//在 Go 的包(package)中，只有首字母大写的才能被其他包 导入使用，小写开头的则不行 。
 	//所以一般结构体的私有数据成员和方法，我们使用小写开头，而公有的数据成员和方法，我们使用大写开头就好了。
+	mSetObj := NewSet([]string{"hello", "world", "hello", "meme"})
+	showValues(mSetObj)
+	mSetObj.Add("add value ---")
+	fmt.Println("++++++++++++++++++")
+	showValues(mSetObj)
+	fmt.Println("++++++++++++++++++")
+	fmt.Println("hello exists is :", mSetObj.Exist("hello"))
+	mSetObj.Delete("hello")
+	fmt.Println("++++++++++++++++++")
+	fmt.Println("hello exists is :", mSetObj.Exist("hello"))
+	fmt.Println("++++++++++++++++++")
+	showValues(mSetObj)
 }
 
 func main() {
@@ -535,5 +590,6 @@ func main() {
 	//mapTest()
 	//loopTest()
 	//funcTest()
-	testString()
+	//testString()
+	structTest()
 }
