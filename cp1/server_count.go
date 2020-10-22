@@ -21,9 +21,9 @@ func doNothing(w http.ResponseWriter, r *http.Request){}
 
 func handler(w http.ResponseWriter, r *http.Request){
 	if r.URL.RequestURI() == "/favicon.ico"{
-		fmt.Printf("view favicon ico %d \n", count)
+		fmt.Printf("handler view favicon ico %d \n", count)
 	}else{
-		fmt.Printf("not view favicon ico %d \n", count)
+		fmt.Printf("handler not view favicon ico %d \n", count)
 	}
 	mu.Lock()
 	count += 1
@@ -32,6 +32,11 @@ func handler(w http.ResponseWriter, r *http.Request){
 }
 
 func counter(w http.ResponseWriter, r *http.Request){
+	if r.URL.RequestURI() == "/favicon.ico"{
+		fmt.Printf("counter view favicon ico %d \n", count)
+	}else{
+		fmt.Printf("counter not view favicon ico %d \n", count)
+	}
 	mu.Lock()
 	count += 1
 	fmt.Fprintf(w, "Count %d \n", count)
