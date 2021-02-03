@@ -1,36 +1,37 @@
-package main
-import(
+package cp1
+
+import (
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"time"
 )
 
-func fetch(url string, ch chan<-string){
+func fetch(url string, ch chan<- string) {
 	start := time.Now()
 	resp, err := http.Get(url)
-	if err != nil{
+	if err != nil {
 		fmt.Printf("%s", err)
 	}
 	nbytes, err := io.Copy(ioutil.Discard, resp.Body)
 	resp.Body.Close()
-	if err != nil{
+	if err != nil {
 		ch <- fmt.Sprintf("while reading %s : %v", url, err)
 	}
 	secs := time.Since(start).Seconds()
-	ch <- fmt.Sprintf("%.2fs %7d %s ", secs, nbytes,url)
+	ch <- fmt.Sprintf("%.2fs %7d %s ", secs, nbytes, url)
 }
 
-func main(){
+func ChFetchAll() {
 	start := time.Now()
 	ch := make(chan string)
-	for _, url := range os.Args[1:]{
+	url_list := []string{"http://pypi.i.brainpp.cn/liveness/dev/%2Bf/167/7dcc9d07f31e1/lovelive_sdk-1.76-py3-none-any.whl", "http://pypi.i.brainpp.cn/liveness/dev/%2Bf/167/7dcc9d07f31e1/lovelive_sdk-1.76-py3-none-any.whl"}
+	for _, url := range url_list {
 		go fetch(url, ch)
 	}
-	for range os.Args[1:]{
+	for range url_list {
 		fmt.Println(<-ch)
 	}
-	fmt.Printf("%.2fs elapsed\n",time.Since(start).Seconds())
+	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
 }

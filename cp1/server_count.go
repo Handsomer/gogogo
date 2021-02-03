@@ -1,4 +1,4 @@
-package main
+package cp1
 
 import (
 	"fmt"
@@ -10,19 +10,19 @@ import (
 var mu sync.Mutex
 var count int
 
-func main(){
+func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/count", counter)
 	//http.HandleFunc("/favicon.ico", doNothing)
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-func doNothing(w http.ResponseWriter, r *http.Request){}
+func doNothing(w http.ResponseWriter, r *http.Request) {}
 
-func handler(w http.ResponseWriter, r *http.Request){
-	if r.URL.RequestURI() == "/favicon.ico"{
+func handler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.RequestURI() == "/favicon.ico" {
 		fmt.Printf("handler view favicon ico %d \n", count)
-	}else{
+	} else {
 		fmt.Printf("handler not view favicon ico %d \n", count)
 	}
 	mu.Lock()
@@ -31,10 +31,10 @@ func handler(w http.ResponseWriter, r *http.Request){
 	mu.Unlock()
 }
 
-func counter(w http.ResponseWriter, r *http.Request){
-	if r.URL.RequestURI() == "/favicon.ico"{
+func counter(w http.ResponseWriter, r *http.Request) {
+	if r.URL.RequestURI() == "/favicon.ico" {
 		fmt.Printf("counter view favicon ico %d \n", count)
-	}else{
+	} else {
 		fmt.Printf("counter not view favicon ico %d \n", count)
 	}
 	mu.Lock()
