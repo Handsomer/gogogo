@@ -1,9 +1,10 @@
 package main
 
 import (
-	"gogogo/cp1"
-	"gogogo/cp5"
-	"gogogo/cp8"
+	"show_module/cp1"
+	"show_module/cp5"
+	"show_module/cp8"
+	"show_module/evuse"
 )
 
 func showAllPackage() {
@@ -24,10 +25,10 @@ func showAllPackage() {
 	cp8.MapRangeAndGetUse()
 	// 使用 sync map
 	cp8.SyncMapUse()
+	// 使用 log 模块 实现输出结果
+	evuse.LogTest()
 }
 
 func main() {
-	// cp8.RunOneServer("China", "localhost:8003")
-	// cp8.RunOneServer("America", "localhost:8004")
 	showAllPackage()
 }
