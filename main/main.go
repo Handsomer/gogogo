@@ -27,6 +27,10 @@ func showAllPackage() {
 	cp8.SyncMapUse()
 	// 使用 log 模块 实现输出结果
 	evuse.LogTest()
+	// 使用 itoa
+	evuse.ItoaUse()
+	//
+	cp8.SelectGoroutine()
 }
 
 func main() {
