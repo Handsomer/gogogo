@@ -29,7 +29,7 @@ func showAllPackage() {
 	evuse.LogTest()
 	// 使用 itoa
 	evuse.ItoaUse()
-	//
+	// SelectGoroutine  chan 缓存队列验证
 	cp8.SelectGoroutine()
 }
 
